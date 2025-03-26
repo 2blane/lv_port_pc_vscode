@@ -6,7 +6,7 @@ set(FREERTOS_PORT GCC_POSIX CACHE STRING "Port for FreeRTOS on Posix environment
 
 unset(USE_FREERTOS CACHE)
 
-option(USE_FREERTOS "Enable FreeRTOS" ON) # Turn this on to enable FreeRTOS
+option(USE_FREERTOS "Enable FreeRTOS" OFF) # Turn this on to enable FreeRTOS
 
 if(USE_FREERTOS)
     message(STATUS "FreeRTOS is enabled")
@@ -81,7 +81,7 @@ if(USE_FREERTOS)
         ${FREERTOS_SOURCES}  # Add only if USE_FREERTOS is enabled
     )
     # Link FreeRTOS libraries
-    target_link_libraries(main freertos_config FreeRTOS)
+    target_link_libraries(main freertos_config freertos_kernel)#FreeRTOS)
 else()
     add_executable(main
         ${PROJECT_SOURCE_DIR}/main/src/main.c
