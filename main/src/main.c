@@ -64,6 +64,28 @@ extern void freertos_main(void);
  *   GLOBAL FUNCTIONS
  **********************/
 
+ /**
+  * DANIEL
+  * Update this function to draw on the screen.
+  */
+ void drawInitialScreen()
+{
+  //DEMOS - uncomment them to run this.
+  //lv_demo_music();
+  //lv_demo_flex_layout();
+  //lv_demo_benchmark();
+
+  // CODE STARTS HERE - Draw some text on the screen - make sure to comment out the lv_demo above
+  // Change the active screen's background color
+  lv_obj_set_style_bg_color(lv_screen_active(), lv_color_hex(0x003a57), LV_PART_MAIN);
+
+  // Create a white label, set its text and align it to the center
+  lv_obj_t * label = lv_label_create(lv_screen_active());
+  lv_label_set_text(label, "Hello world");
+  lv_obj_set_style_text_color(lv_screen_active(), lv_color_hex(0xffffff), LV_PART_MAIN);
+  lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
+}
+
 int main(int argc, char **argv)
 {
   (void)argc; /*Unused*/
@@ -74,10 +96,9 @@ int main(int argc, char **argv)
   lv_init();
 
   /*Initialize the HAL (display, input devices, tick) for LVGL*/
-  hal_init(320, 480);
+  hal_init(320, 480); //DANIEL - Update this to set the display size of the device... 160x160 px for instance
 
-  //lv_demo_widgets();
-  lv_demo_music();
+  drawInitialScreen();
 
   while(1) {
     /* Periodically call the lv_task handler.
